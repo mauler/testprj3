@@ -6,7 +6,8 @@ class Schema(models.Model):
 
 
 class SchemaField(models.Model):
-    schema = models.ForeignKey('Schema', on_delete=models.CASCADE)
+    schema = models.ForeignKey('Schema', on_delete=models.CASCADE,
+                               related_name='fields')
 
     field_class = models.CharField(max_length=50)
 
@@ -17,6 +18,10 @@ class SchemaField(models.Model):
 
     class Meta:
         unique_together = ('schema', 'field_name', )
+
+    def __str__(self):
+        return 'SchemaField for {}: "{}"'.format(self.schema.title,
+                                                 self.field_name)
 
 
 class SchemaInstance(models.Model):
