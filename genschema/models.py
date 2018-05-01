@@ -37,3 +37,10 @@ class SchemaIValue(models.Model):
 
     class Meta:
         unique_together = ('schemainstance', 'schemafield')
+        ordering = ('schemainstance', 'schemafield', )
+
+    def __str__(self):
+        return 'SchemaIValue for "{}" => {}'.format(
+            self.schemafield.field_name,
+            self.fieldvalue)
+
